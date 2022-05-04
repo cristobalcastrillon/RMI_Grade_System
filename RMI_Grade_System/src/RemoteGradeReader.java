@@ -1,5 +1,3 @@
-package Server;
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,7 +5,7 @@ import java.io.IOException;
 import java.rmi.*;
 import java.rmi.server.*;
 
-public class RemoteGradeReader extends UnicastRemoteObject implements Common.GradeReader {
+public class RemoteGradeReader extends UnicastRemoteObject implements GradeReader {
     public RemoteGradeReader() throws RemoteException {
         super();
     }

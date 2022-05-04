@@ -1,7 +1,3 @@
-package TeacherClient;
-
-import Common.GradeManager;
-
 import java.rmi.Naming;
 import java.util.Objects;
 import java.util.Scanner;

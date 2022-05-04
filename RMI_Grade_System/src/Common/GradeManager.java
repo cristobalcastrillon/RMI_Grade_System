@@ -1,4 +1,4 @@
-package TeacherClient;
+package Common;
 
 public interface GradeManager extends java.rmi.Remote {
     public void enterGrades(String studentID, String subjectID, String grade) throws java.rmi.RemoteException;

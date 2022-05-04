@@ -1,5 +1,3 @@
-package Server;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,7 +5,7 @@ import java.nio.file.StandardOpenOption;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteGradeManager extends UnicastRemoteObject implements Common.GradeManager {
+public class RemoteGradeManager extends UnicastRemoteObject implements GradeManager {
 
     private String csString;
 

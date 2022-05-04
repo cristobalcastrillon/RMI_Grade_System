@@ -1,5 +1,3 @@
-package StudentClient;
-
 import Common.GradeReader;
 
 import java.rmi.Naming;
