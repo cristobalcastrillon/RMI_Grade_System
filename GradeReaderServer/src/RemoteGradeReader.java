@@ -2,10 +2,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.rmi.*;
-import java.rmi.server.*;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteGradeReader extends UnicastRemoteObject implements GradeReader {
+public class RemoteGradeReader extends UnicastRemoteObject implements Common.GradeReader {
     public RemoteGradeReader() throws RemoteException {
         super();
     }
