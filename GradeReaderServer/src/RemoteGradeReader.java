@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class RemoteGradeReader extends UnicastRemoteObject implements Common.GradeReader {
+public class RemoteGradeReader extends UnicastRemoteObject implements GradeReader {
     public RemoteGradeReader() throws RemoteException {
         super();
     }
