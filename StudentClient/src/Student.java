@@ -1,5 +1,3 @@
-import Common.GradeReader;
-
 import java.rmi.Naming;
 
 public class Student {
@@ -19,7 +17,7 @@ public class Student {
      * @param args: host IP address and port combination.
      * @return response: String containing user requested grades.
      */
-    public String showGrades(String subjectID, String args[]){
+    public String showGrades(String subjectID, String[] args){
         // First, let's implement reading just one grade for one subject.
         String response = null;
         try {

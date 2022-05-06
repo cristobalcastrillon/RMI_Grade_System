@@ -7,10 +7,11 @@ import java.rmi.server.UnicastRemoteObject;
 
 public class RemoteGradeManager extends UnicastRemoteObject implements GradeManager {
 
-    private String csString;
+    private String csString = null;
 
     public RemoteGradeManager() throws RemoteException {
         super();
+        System.out.println("B");
     }
 
     public void enterGrades(String studentID, String subjectID, String grade) throws RemoteException {
@@ -24,7 +25,6 @@ public class RemoteGradeManager extends UnicastRemoteObject implements GradeMana
             } catch (IOException e) {
 
                 File gradesFile = new File(System.getProperty("user.dir") + "/Grades.csv");
-
                 try {
                     gradesFile.createNewFile();
                 } catch (IOException ioE) {

@@ -4,9 +4,8 @@ import java.util.Scanner;
  * Client application for Students.
  * Its sole method is reading (displaying to user) the grades registered.
  */
-
 public class StudentClient {
-    public static void main(String args[]){
+    public static void main(String[] args){
 
         Scanner sc = new Scanner(System.in);
 

@@ -10,7 +10,9 @@ import java.util.Scanner;
  */
 
 public class TeacherClient {
-    public static void main(String args[]){
+    public static void main(String[] args){
+
+        Registry registry = LocateRegistry("127.0.0.1", 9100);
 
         Scanner sc = new Scanner(System.in);
 
@@ -25,8 +27,7 @@ public class TeacherClient {
                     "4. Exit");
             option = sc.next();
             try {
-                GradeManager gradeManager = (GradeManager) Naming.lookup("rmi://" +
-                        args[0] + "/" + "GradeManager");
+                GradeManager gradeManager = (GradeManager) registry.lookup("GradeManager");
                 switch (option) {
                     // No regex for this input (academic exercise).
                     case "1":
