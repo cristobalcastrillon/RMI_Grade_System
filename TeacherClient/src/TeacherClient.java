@@ -12,8 +12,6 @@ import java.util.Scanner;
 public class TeacherClient {
     public static void main(String[] args){
 
-        Registry registry = LocateRegistry("127.0.0.1", 9100);
-
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Welcome.");
@@ -24,10 +22,11 @@ public class TeacherClient {
             System.out.print("1. Enter a new grade.\n" +
                     "2. Update an existing grade.\n" +
                     "3. Delete a grade.\n" +
-                    "4. Exit");
+                    "4. Exit\n");
             option = sc.next();
             try {
-                GradeManager gradeManager = (GradeManager) registry.lookup("GradeManager");
+                GradeManager gradeManager = (GradeManager) Naming.lookup("rmi://" +
+                        args[0] + "/" + "GradeManager");
                 switch (option) {
                     // No regex for this input (academic exercise).
                     case "1":
@@ -42,12 +41,12 @@ public class TeacherClient {
                     case "4":
                         break;
                 }
+                System.exit(0);
             }
             catch(Exception e){
                 System.err.println("An error has occurred, please try again later.");
             }
         }
-        System.exit(0);
     }
 
     public static void enterGradesUserInterface(GradeManager gradeManager, Scanner sc) throws java.rmi.RemoteException {

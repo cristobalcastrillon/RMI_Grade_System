@@ -5,13 +5,13 @@ import java.rmi.server.UnicastRemoteObject;
 public class GradeManagerServer {
     public static void main(String[] args) {
         try{
-            System.setProperty("java.rmi.server.hostname", "127.0.0.1");
+            System.setProperty("java.rmi.server.hostname", "127.0.1.1");
             System.out.println("A");
 
             RemoteGradeManager remoteGradeManager = new RemoteGradeManager();
             System.out.println("C");
 
-            Registry registry = LocateRegistry.getRegistry("127.0.0.1", 9100);
+            Registry registry = LocateRegistry.getRegistry("127.0.1.1", 9100);
             System.out.println("E");
 
             registry.rebind("GradeManager", remoteGradeManager);
