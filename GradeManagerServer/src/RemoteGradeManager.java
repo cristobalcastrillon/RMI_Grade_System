@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.rmi.RemoteException;
@@ -11,7 +12,6 @@ public class RemoteGradeManager extends UnicastRemoteObject implements GradeMana
 
     public RemoteGradeManager() throws RemoteException {
         super();
-        System.out.println("B");
     }
 
     public void enterGrades(String studentID, String subjectID, String grade) throws RemoteException {
@@ -20,11 +20,10 @@ public class RemoteGradeManager extends UnicastRemoteObject implements GradeMana
         while (!success) {
             try {
                 csString = stringConcatHelper(studentID, subjectID, grade);
-                Files.write(Paths.get(System.getProperty("user.dir") + "/Grades.csv"), csString.getBytes(), StandardOpenOption.APPEND);
+                Files.write(Paths.get("/Users/cristobalcastrilonbalcazar/Dev/RMI_Grade_System" + "/Grades.csv"), csString.getBytes(), StandardOpenOption.APPEND);
                 success = true;
             } catch (IOException e) {
-
-                File gradesFile = new File(System.getProperty("user.dir") + "/Grades.csv");
+                File gradesFile = new File("/Users/cristobalcastrilonbalcazar/Dev/RMI_Grade_System" + "/Grades.csv");
                 try {
                     gradesFile.createNewFile();
                 } catch (IOException ioE) {

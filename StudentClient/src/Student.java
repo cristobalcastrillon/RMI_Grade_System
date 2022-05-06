@@ -28,7 +28,7 @@ public class Student {
             response = studentGradeReader.readGrades(this.studentID, subjectID);
         }
         catch (Exception e){
-            System.err.println("An error has occurred, please try again later.");
+            System.err.println(e);
         }
         return response;
     }
