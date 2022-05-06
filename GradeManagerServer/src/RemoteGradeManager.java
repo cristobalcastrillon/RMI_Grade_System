@@ -1,10 +1,10 @@
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 public class RemoteGradeManager extends UnicastRemoteObject implements GradeManager {
 
@@ -38,20 +38,19 @@ public class RemoteGradeManager extends UnicastRemoteObject implements GradeMana
         boolean combinationFound = false;
         try {
 
-            BufferedReader csvReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/Grades.csv"));
+            BufferedReader csvReader = new BufferedReader(new FileReader("/Users/cristobalcastrilonbalcazar/Dev/RMI_Grade_System" + "/Grades.csv"));
 
             try {
 
                 String row;
-                String[][] fileCopy = null;
-                int rowCounter = 0;
+                ArrayList<String[]> fileCopy = new ArrayList<>();
 
                 while ((row = csvReader.readLine()) != null) {
                     String[] data = row.split(",");
-                    if (data[0] == studentID && data[1] == subjectID) {
+                    if (data[0].equals(studentID) && data[1].equals(subjectID)) {
                         combinationFound = true;
                     } else {
-                        fileCopy[rowCounter++] = data;
+                        fileCopy.add(data);
                     }
                 }
 
@@ -62,7 +61,7 @@ public class RemoteGradeManager extends UnicastRemoteObject implements GradeMana
                 csvReader.close();
 
                 // Delete file
-                File gradesFile = new File(System.getProperty("user.dir") + "/Grades.csv");
+                File gradesFile = new File("/Users/cristobalcastrilonbalcazar/Dev/RMI_Grade_System" + "/Grades.csv");
                 if (!gradesFile.delete())
                     throw new IOException();
 
@@ -81,21 +80,20 @@ public class RemoteGradeManager extends UnicastRemoteObject implements GradeMana
         boolean combinationFound = false;
         try {
 
-            BufferedReader csvReader = new BufferedReader(new FileReader(System.getProperty("user.dir") + "/Grades.csv"));
+            BufferedReader csvReader = new BufferedReader(new FileReader("/Users/cristobalcastrilonbalcazar/Dev/RMI_Grade_System" + "/Grades.csv"));
 
             try {
 
                 String row;
-                String[][] fileCopy = null;
-                int rowCounter = 0;
+                ArrayList<String[]> fileCopy = new ArrayList<>();
 
                 while ((row = csvReader.readLine()) != null) {
                     String[] data = row.split(",");
-                    if (data[0] == studentID && data[1] == subjectID) {
+                    if (data[0].equals(studentID) && data[1].equals(subjectID)) {
                         combinationFound = true;
                         data[2] = grade;
                     }
-                    fileCopy[rowCounter++] = data;
+                    fileCopy.add(data);
                 }
 
                 if (!combinationFound) {
@@ -103,14 +101,12 @@ public class RemoteGradeManager extends UnicastRemoteObject implements GradeMana
                 }
                 csvReader.close();
 
-                // Delete file
-                File gradesFile = new File(System.getProperty("user.dir") + "/Grades.csv");
+                File gradesFile = new File("/Users/cristobalcastrilonbalcazar/Dev/RMI_Grade_System" + "/Grades.csv");
                 if (!gradesFile.delete())
                     throw new IOException();
 
-                // Write copy file
                 writeCopyFile(fileCopy);
-            } catch (IOException e) {
+            } catch (Exception e) {
                 throw new RemoteException("File handling has gone wrong.");
             }
         } catch (FileNotFoundException e) {
@@ -122,15 +118,19 @@ public class RemoteGradeManager extends UnicastRemoteObject implements GradeMana
         return studentID + "," + subjectID + "," + grade;
     }
 
-    private void writeCopyFile(String[][] fileCopy) throws IOException {
-        FileWriter csvWriter = new FileWriter("Grades.csv");
-        for (String[] row : fileCopy) {
-            for (String field : row) {
-                csvWriter.append(field);
-                csvWriter.append(",");
+    private void writeCopyFile(ArrayList<String[]> fileCopy) throws IOException {
+        FileWriter csvWriter = new FileWriter("/Users/cristobalcastrilonbalcazar/Dev/RMI_Grade_System/Grades.csv");
+
+        for(Integer i = 0; i < fileCopy.size(); i++){
+            String[] row = fileCopy.get(i);
+            for(Integer j = 0; j < row.length; j++){
+                csvWriter.append(row[j]);
+                if(j != row.length - 1)
+                    csvWriter.append(",");
             }
             csvWriter.append("\n");
         }
+
         csvWriter.flush();
         csvWriter.close();
     }
